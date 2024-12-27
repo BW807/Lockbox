@@ -2,6 +2,7 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -70,10 +71,10 @@ public class Password {
     public String charPassword(int numChars, String charChoice) {
         Random random = new Random();
 
-        if (charChoice == "y") {
+        if (!Objects.equals(charChoice, "y")) {
             int i;
             for (i = 0; i < numChars; ++i) {
-                int tempVal = random.nextInt(92);
+                int tempVal = random.nextInt(55);
                 String tempChar = this.charlistSafe.get(tempVal);
                 this.chosenCharList.add(tempChar);
             }
@@ -83,11 +84,10 @@ public class Password {
                 this.finalPass = tempChar + this.finalPass;
             }
 
-            return this.finalPass;
         } else {
             int i;
             for (i = 0; i < numChars; ++i) {
-                int tempVal = random.nextInt(92);
+                int tempVal = random.nextInt(83);
                 String tempChar = this.charlistRisky.get(tempVal);
                 this.chosenCharList.add(tempChar);
             }
@@ -97,7 +97,7 @@ public class Password {
                 this.finalPass = tempChar + this.finalPass;
             }
 
-            return this.finalPass;
         }
+        return this.finalPass;
     }
 }

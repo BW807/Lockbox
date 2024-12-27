@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -11,11 +12,12 @@ public class Main {
         PasswordManager passwordManager = new PasswordManager();
         Scanner scnr = new Scanner(System.in);
         menu.open();
+        int currChoice = menu.returnChoice();
 
-        for(int currChoice = menu.returnChoice(); currChoice != 5; menu.open()) {
+        while(currChoice != 5) {
+
             if (currChoice < 1 || currChoice > 5) {
                 System.out.println("invalid choice, please try again.\n");
-                menu.open();
             }
 
             if (currChoice == 1) {
@@ -27,10 +29,13 @@ public class Main {
                 System.out.println("Generated : " + NewPass);
                 System.out.println();
                 System.out.println("(y/n) add it to your list?");
-                if (scnr.next() == "y") {
+                if (Objects.equals(scnr.next(), "y")) {
                     passwordManager.add(NewPass);
                 }
             }
+
+            menu.open();
+            currChoice = menu.returnChoice();
         }
     }
 }

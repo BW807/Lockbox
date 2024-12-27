@@ -1,22 +1,47 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class PasswordManager {
 
-    public void add(String Password) {
+    private int numPass = 1;
 
+    public void add(String password) throws FileNotFoundException {
+        File file = new File("list.txt");
+
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+                System.out.println("File created: " + file.getName());
+            } catch (IOException e) {
+                System.out.println("An error occurred while creating the file.");
+                e.printStackTrace();
+                return;
+            }
+        }
+
+        // Use append mode to avoid overwriting the file's contents
+        try (FileOutputStream fileOutputStream = new FileOutputStream(file, true);
+             PrintWriter newPW = new PrintWriter(fileOutputStream)) {
+            newPW.println(password);
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the file.");
+            e.printStackTrace();
+        }
     }
+
+
+
+
 
     public void remove() {
 
     }
 
-    public void open() {
+    public void clear() {
 
+    }
+
+    public void open() {
         File file = new File("list.txt");
 
         if (!file.exists()) {
@@ -34,7 +59,8 @@ public class PasswordManager {
              Scanner scnr = new Scanner(fileInputStream)) {
 
             while (scnr.hasNextLine()) {
-                System.out.println(scnr.nextLine());
+                System.out.println(numPass + ": " + scnr.nextLine());
+                numPass++;
             }
 
         } catch (FileNotFoundException e) {
