@@ -17,10 +17,10 @@ public class Menu {
 
     public void open() {
         System.out.println("Welcome to PassKing passwork manager!\n Please choose an option below: \n");
-        System.out.println("1. import current password combos");
-        System.out.println("2. export current password combos");
-        System.out.println("3. generate new password");
-        System.out.println("4. view current passwords");
+        System.out.println("1. view current passwords");
+        System.out.println("2. import current password combos");
+        System.out.println("3. export current password combos");
+        System.out.println("4. generate new password");
         System.out.println("5. exit");
         this.currChoice = this.scnr.nextInt();
     }

@@ -17,6 +17,9 @@ public class Password {
     }
 
     public void importWords() throws FileNotFoundException {
+
+        chosenWordList.clear();
+
         FileInputStream fileInputStream = new FileInputStream("words.txt");
         Scanner filescnr = new Scanner(fileInputStream);
 
@@ -27,6 +30,9 @@ public class Password {
     }
 
     public void importChars() throws FileNotFoundException {
+
+        chosenCharList.clear();
+
         FileInputStream fileInputStreamSafe = new FileInputStream("safechars.txt");
         Scanner filescnrsafe = new Scanner(fileInputStreamSafe);
 
