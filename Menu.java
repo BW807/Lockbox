@@ -16,12 +16,20 @@ public class Menu {
     }
 
     public void open() {
-        System.out.println("Welcome to PassKing passwork manager!\n Please choose an option below: \n");
-        System.out.println("1. view current passwords");
-        System.out.println("2. import current password combos");
-        System.out.println("3. export current password combos");
-        System.out.println("4. generate new password");
-        System.out.println("5. exit");
+        System.out.println("\nWelcome to PassKing passwork manager!\n Please choose an option below: \n");
+        System.out.println("1. View current passwords");
+        System.out.println("2. Generate new password");
+        System.out.println("3. More");
+        System.out.println("4. Exit");
+        this.currChoice = this.scnr.nextInt();
+    }
+
+    public void additionalOpen() {
+        System.out.println("Additional Options: \n");
+        System.out.println("1. Clear saved combos");
+        System.out.println("2. Save custom password combo");
+        System.out.println("3. Delete a saved password combo");
+        System.out.println("4. Exit");
         this.currChoice = this.scnr.nextInt();
     }
 
@@ -33,7 +41,7 @@ public class Menu {
         return this.charChoice;
     }
 
-    public String generatePassword() throws FileNotFoundException {
+    public Combo generatePassword() throws FileNotFoundException {
         System.out.println("Choose a password generation style: ");
         System.out.println("1. Random Words");
         System.out.println("2. Random Characters");
@@ -55,7 +63,8 @@ public class Menu {
             choice = this.scnr.nextInt();
             return password.charPassword(choice, charChoice);
         } else {
-            return "Invalid Choice";
+            System.out.println("Something went wrong, Please try again.");
+            return new Combo(null);
         }
     }
 }

@@ -1,11 +1,14 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PasswordManager {
 
     private int numPass = 1;
 
-    public void add(String password) throws FileNotFoundException {
+    ArrayList<Combo> ComboList = new ArrayList<Combo>();
+
+    public void add(Combo combopass) throws FileNotFoundException {
         File file = new File("list.txt");
 
         if (!file.exists()) {
@@ -22,24 +25,42 @@ public class PasswordManager {
         // Use append mode to avoid overwriting the file's contents
         try (FileOutputStream fileOutputStream = new FileOutputStream(file, true);
              PrintWriter newPW = new PrintWriter(fileOutputStream)) {
-            newPW.println(password);
+
+            newPW.println("Combo " + numPass);
+            newPW.println("Website : " + combopass.returnWebsite());
+            newPW.println("Username : " + combopass.returnUsername());
+            newPW.println("Email : " + combopass.returnEmail());
+            newPW.println("Password : " + combopass.returnPassword() + "\n");
+
+            numPass++;
+
         } catch (IOException e) {
             System.out.println("An error occurred while writing to the file.");
             e.printStackTrace();
         }
     }
 
-
-
-
-
     public void remove() {
 
     }
 
     public void clear() {
+        File file = new File("list.txt");
 
+        if (!file.exists()) {
+            System.out.println("File does not exist.");
+            return;
+        }
+
+        try (PrintWriter writer = new PrintWriter(file)) {
+            writer.print(""); // Overwrite the file with an empty string
+            System.out.println("All passwords have been cleared.");
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred while clearing the file.");
+            e.printStackTrace();
+        }
     }
+
 
     public void open() {
         File file = new File("list.txt");
@@ -59,8 +80,7 @@ public class PasswordManager {
              Scanner scnr = new Scanner(fileInputStream)) {
 
             while (scnr.hasNextLine()) {
-                System.out.println(numPass + ": " + scnr.nextLine());
-                numPass++;
+                    System.out.println(scnr.nextLine());
             }
 
         } catch (FileNotFoundException e) {

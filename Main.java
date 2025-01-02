@@ -14,23 +14,42 @@ public class Main {
         menu.open();
         int currChoice = menu.returnChoice();
 
-        while(currChoice != 5) {
+        while (currChoice != 5) {
 
             if (currChoice < 1 || currChoice > 5) {
                 System.out.println("invalid choice, please try again.\n");
             }
 
-            if (currChoice == 1) {
+            else if (currChoice == 1) {
                 passwordManager.open();
             }
 
-            if (currChoice == 4) {
-                String NewPass = menu.generatePassword();
-                System.out.println("Generated : " + NewPass);
+            else if (currChoice == 2) {
+                Combo NewPass = menu.generatePassword();
+                System.out.println("Generated : ");
+                NewPass.printCombo();
                 System.out.println();
                 System.out.println("(y/n) add it to your list?");
                 if (Objects.equals(scnr.next(), "y")) {
+                    NewPass.createCombo(NewPass.returnPassword());
                     passwordManager.add(NewPass);
+                }
+            }
+
+            else if (currChoice == 3) {
+                menu.additionalOpen();
+                int addChoice = menu.returnChoice();
+
+                if (addChoice == 1) {
+                    passwordManager.clear();
+                }
+                else if (addChoice == 2) {
+                    Combo customCombo = new Combo();
+                    customCombo.createCombo();
+                    passwordManager.add(customCombo);
+                }
+                else {
+                    System.out.println("invalid choice, please try again.\n");
                 }
             }
 

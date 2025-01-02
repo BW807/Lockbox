@@ -50,7 +50,7 @@ public class Password {
 
     }
 
-    public String wordPassword(int numWords) {
+    public Combo wordPassword(int numWords) {
         Random random = new Random();
 
         int i;
@@ -65,10 +65,12 @@ public class Password {
             this.finalPass = tempWord + " " + this.finalPass;
         }
 
-        return this.finalPass;
+        Combo temp = new Combo(this.finalPass);
+
+        return temp;
     }
 
-    public String charPassword(int numChars, String charChoice) {
+    public Combo charPassword(int numChars, String charChoice) {
         Random random = new Random();
 
         if (!Objects.equals(charChoice, "y")) {
@@ -98,6 +100,9 @@ public class Password {
             }
 
         }
-        return this.finalPass;
+
+        Combo temp = new Combo(this.finalPass);
+
+        return temp;
     }
 }
